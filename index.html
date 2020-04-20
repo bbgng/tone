@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Toneのテスト</title>
+<link rel="stylesheet" href="index.css">
+<script src="tone.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+  <h1>Toneのテスト</h1>
+  <div id="keyboard">
+    <div id="play" onclick="setPlay">
+      Play
+    </div>
+  </div>
+
+<h2>コード作成</h2>
+
+<div id="code_generator">
+  <div class="root">
+    <button id="scale0" value="0">C</button>
+    <button id="scale1" value="1">C#</button>
+    <button id="scale2" value="2">D</button>
+    <button id="scale3" value="3">D#</button>
+    <button id="scale4" value="4">E</button>
+    <button id="scale5" value="5">F</button>
+    <button id="scale6" value="6">F#</button>
+    <button id="scale7" value="7">G</button>
+    <button id="scale8" value="8">G#</button>
+    <button id="scale9" value="9">A</button>
+    <button id="scale10" value="10">A#</button>
+    <button id="scale11" value="11">B</button>
+  </div>
+  <div class="key">
+    <button id="Maj" value="Maj">Maj</button>
+    <button id="min" value="min">min</button>
+  </div>
+  <div class="duration">
+    <select name="duration">
+      <option value="4n">1/4</option>
+      <option value="8n">1/8</option>
+      <option value="2n">1/2</option>
+      <option value="1n">1/1</option>
+    </select>
+  </div>
+  <div id="new_code">
+    <span class="root">C</span><span class="key"></span>
+  </div>
+  <button id="add" value="add">Add</button>
+</div>
+
+
+<h2>コード進行</h2>
+<ol id="code_list">
+  <!--  動的にリストを追加　-->
+</ol>
+</body>
+</html>

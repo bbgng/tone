@@ -1,0 +1,22 @@
+#play {
+  background-color: #cccccc;
+  height: 100px;
+  width: 200px;
+}
+
+#code_list li {
+  background-color: #ccccff;
+  display: inline-block;
+  height: 100px;
+  margin: 4px;
+  padding: 4px;
+  width: 100px;
+}
+
+#code_list li .note {
+  height: 50%;
+  font-size: 1.6rem;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+}
