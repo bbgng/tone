@@ -13,7 +13,7 @@ const Duration = {
   "4n" : "1/4",
   "8n" : "1/8",
   "2n" : "1/2",
-  "1n" : "1/1"
+  "1m" : "1/1"
 }
 //
 // Classの定義
@@ -57,7 +57,6 @@ class Score {
   }
 
   addNote(duration, code) {
-    console.log(duration);
     this.list.push([duration, code]);
   }
 
@@ -67,15 +66,14 @@ class Score {
     for(var i=0, l=this.list.length; i<l; i++){
       var bars = parseInt(nodePos/4);
       var count = nodePos - bars*4;
-      var duration = Duration[this.list[i][0]];
-      console.log(duration);
-      ret.push([
-        bars+":"+count+":0",
-        this.list[i][1].note,
-        duration]);
-      nodePos += 1;
 
-      // nodePos += parseFraction(this.list[i][0])*4;
+      ret.push({
+        'time': bars+":"+count+":0",
+        'note': this.list[i][1].note,
+        'duration': this.list[i][0]
+      });
+
+      nodePos += parseFraction(Duration[ret[i].duration])*4;
     }
     return ret;
   }
@@ -101,17 +99,13 @@ var keyUp = 0;
 
 var addCodeRoot = 0;
 var addCodeKeyName = "Maj";
-var duration = 1;
-
-// var duration = 1;
-console.log(duration);
+var duration = "4n";
 
 var score = new Score();
 var melodyList = [];  //最終的に関数に突っ込む変数
 
 var melody;
 var nodePos = 0;
-
 
 function addNote(){
 
@@ -128,10 +122,6 @@ function addNote(){
 
   //画面に表示
   var codeList = document.getElementById("code_list");
-  var ret ="";
-  for(var i=0, l=melodyList.length; i<l; i++) {
-    ret += score.list[i][1].name();
-  }
   codeList.innerHTML = score.getHTML();
 
 }
@@ -182,34 +172,26 @@ window.onload = function() {
 
 }
 
-// //durationの変更コード
-// function changeDuration() {
-//   //durationの取得
-//   var select = document.querySelector(".duration select");
-//   duration = document.querySelector(".duration select").value);
-//   // console.log(duration);
-// }
-
 function play() {
-  var context = new AudioContext();
-  context.resume().then(() => {
-    console.log('Playback resumed successfully');
-  });
 
   melody = new Tone.Part(setPlay, melodyList).start();
   melody.loop = 4;
   melody.loopEnd = "2m";
-  Tone.Transport.bpm.value = 90; //bpm90
+  Tone.Transport.bpm.value = 90;
   Tone.Transport.start();
 }
 
 var synth = new Tone.PolySynth().toMaster();
 
 function setPlay(time, note) {
-  synth.triggerAttackRelease(note, '4n', time);
+  synth.triggerAttackRelease(note.note, note.duration, time);
 }
 
 function parseFraction(f) {
   var tmp = f.split("/");
   return parseFloat(parseInt(tmp[0])/parseInt(tmp[1]));
+}
+
+function test() {
+  var tmp = {a: "1+1"+"は"+"2です"}
 }
